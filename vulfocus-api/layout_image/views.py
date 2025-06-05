@@ -1358,6 +1358,8 @@ def upload_zip_file(request):
                         network_list = []
                         for single_network in docker_networks:
                             config_list = single_network.attrs['IPAM']['Config']
+                            if config_list is None:
+                                continue
                             for single_config in config_list:
                                 if "Gateway" in single_config:
                                     network_list.append(single_config["Gateway"].split(".")[0:2])
